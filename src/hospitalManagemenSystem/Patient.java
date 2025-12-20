@@ -1,5 +1,5 @@
 package hospitalManagemenSystem;
 
-public class Node {
+public class Patient {
 
 }
