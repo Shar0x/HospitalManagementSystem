@@ -13,7 +13,7 @@ public class Doctor {
 		this.department = department;
 		this.waitingLine = new Queue();
 	}
-
+	// getter and setter
 	public int getId() {
 		return id;
 	}
