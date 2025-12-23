@@ -28,10 +28,18 @@ public class Patient {
 	public void setSeverityLevel(int severitylevel) {
 		this.severityLevel = severityLevel;
 	}
-
+	
+	public int getSeverityLevel() {
+		// TODO Auto-generated method stub
+		return severityLevel;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "ID: " + id + " | " + name + " | Seviye: " + severityLevel;
 	}
+
+	
 
 }
