@@ -101,4 +101,66 @@ public class HospitalManagementSystem {
 			}
 		}
 	}
+	// This method handles the logic for scheduling a visit with a specific doctor.
+    public void bookAppointment(int docId, int patientId) {
+        // Step 1: Retrieve the patient from the Hash Table using the ID.
+        Patient p = patientTable.get(patientId);
+        
+        // Validation: Check if the patient exists in the system.
+        if (p == null) {
+            System.out.println("Error: Patient not found! Please register the patient first.");
+            return;
+        }
+
+        // Step 2: Search for the doctor in the doctors array.
+        Doctor selectedDoc = null;
+        for (Doctor d : doctors) {
+            // Check if the doctor slot is not null and IDs match
+            if (d != null && d.getId() == docId) {
+                selectedDoc = d;
+                break; // Doctor found, exit loop
+            }
+        }
+
+        // Step 3: Add the patient to the doctor's waiting queue.
+        if (selectedDoc != null) {
+            // Enqueue operation (O(1)) adds patient to the end of the line.
+            selectedDoc.waitingLine.enqueue(p);
+            System.out.println("Success: " + p.getName() + " has been added to Dr. " + selectedDoc.getName() + "'s waiting line.");
+        } else {
+            System.out.println("Error: Doctor with ID " + docId + " could not be found.");
+        }
+    }
+
+    
+    // This method simulates a doctor treating the next patient in line (FIFO).
+    public void processDoctorAppointment(int docId) {
+        // Step 1: Find the doctor by ID.
+        Doctor selectedDoc = null;
+        for (Doctor d : doctors) {
+            if (d != null && d.getId() == docId) {
+                selectedDoc = d;
+                break;
+            }
+        }
+
+        // Step 2: Process the queue if the doctor exists.
+        if (selectedDoc != null) {
+            // Check if there are any patients waiting.
+            if (!selectedDoc.waitingLine.isEmpty()) {
+                // Dequeue the next patient (First-In-First-Out).
+                Patient p = selectedDoc.waitingLine.dequeue();
+                
+                System.out.println(">>> TREATING OUTPATIENT: " + p.getName());
+                
+                // Step 3: Automatically update the patient's medical history.
+                // This fulfills the "Dynamic History Update" requirement.
+                p.addHistory("General Checkup completed with Dr. " + selectedDoc.getName());
+            } else {
+                System.out.println("Message: Dr. " + selectedDoc.getName() + "'s waiting line is currently empty.");
+            }
+        } else {
+            System.out.println("Error: Doctor not found.");
+        }
+    }
 }
