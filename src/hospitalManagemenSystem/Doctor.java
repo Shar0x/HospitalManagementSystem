@@ -19,7 +19,7 @@ public class Doctor {
 	}
 
 	public String getName() {
-		return getName();
+		return name;
 	}
 	public String getDepartment() {
 		return department;
