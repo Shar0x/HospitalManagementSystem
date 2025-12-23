@@ -39,7 +39,7 @@ public class HashMap {
 		}
 		return null;
 	}
-
+	// remove
 	public void remove(int key) {
 		int index = hash(key);
 		HashNode current = table[index];
