@@ -1,9 +1,9 @@
 package hospitalManagemenSystem;
 
 public class Doctor {
-	int id;
-	String name;
-	String department;
+	private int id;
+	private String name;
+	private String department;
 	Queue waitingLine;
 
 	// Default constructor
@@ -12,6 +12,19 @@ public class Doctor {
 		this.name = name;
 		this.department = department;
 		this.waitingLine = new Queue();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return getName();
+	}
+
+	@Override
+	public String toString() {
+		return "Dr." + name + "(" + department + ") - ID" + id;
 	}
 
 }
