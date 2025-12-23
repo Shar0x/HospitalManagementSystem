@@ -16,6 +16,7 @@ public class Patient {
 	public void addHistory(String record) {
 		// medicalHistory.add(record);
 	}
+
 	// getter and setter
 	public int getId() {
 		return id;
@@ -28,18 +29,18 @@ public class Patient {
 	public void setSeverityLevel(int severitylevel) {
 		this.severityLevel = severityLevel;
 	}
-	
+
 	public int getSeverityLevel() {
 		// TODO Auto-generated method stub
 		return severityLevel;
 	}
-	
-	
+	public LinkedList getMedicalHistory() {
+		return medicalHistory;
+	}
+
 	@Override
 	public String toString() {
 		return "ID: " + id + " | " + name + " | Seviye: " + severityLevel;
 	}
-
-	
 
 }

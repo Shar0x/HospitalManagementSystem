@@ -11,6 +11,8 @@ public class HospitalManagementSystem {
 
 	public HospitalManagementSystem(long studentID) {
 		Random rand = new Random(studentID);
+		System.out.println("System Initialized. ID Seed: " + studentID);
+		System.out.println("Random Verification Number: " + rand.nextInt(100));
 
 		this.patientTable = new HashMap(100);
 		this.emergencyQueue = new PriorityQueue(50);
@@ -18,8 +20,9 @@ public class HospitalManagementSystem {
 		this.undoStack = new Stack();
 		this.doctors = new Doctor[5];
 
-		doctors[0] = new Doctor(1, "Dr. Ali", "Dahiliye");
-		doctors[1] = new Doctor(2, "Dr. Ayse", "KBB");
+		doctors[0] = new Doctor(1, "Dr. Kayra", "Internal diseases");
+		doctors[1] = new Doctor(2, "Dr. Yaren", "Dermatalogy ");
+		doctors[2] = new Doctor(3, "Dr. Cemre", "Cardiology");
 	}
 
 	public void registerPatient(int id, String name, int severity) {
@@ -28,33 +31,33 @@ public class HospitalManagementSystem {
 		nameSearchTree.insert(p);
 
 		undoStack.push("REGISTER:" + id);
-		System.out.println("Hasta Kaydedildi: " + name);
+		System.out.println("Patient Registered: " + name + " (ID: " + id + ")");
 	}
 
 	public void admitToER(int id) {
 		Patient p = patientTable.get(id);
 		if (p != null) {
 			emergencyQueue.insert(p);
-			System.out.println(p.getName() + " Acil Servise Alındı (Seviye: " + p.getSeverityLevel() + ")");
-			undoStack.push("ER_ADMIT:" + id);
+			System.out.println("ER ADMISSION: " + p.getName() + " (Severity: " + p.getSeverityLevel() + ")");
+			undoStack.push("ER_ADMIT:" + id); // Log for undo
 		} else {
-			System.out.println("Hasta bulunamadı!");
+			System.out.println("Error: Patient with ID " + id + " not found!");
 		}
 	}
 
 	public void processEmergency() {
 		if (!emergencyQueue.isEmpty()) {
 			Patient p = emergencyQueue.extractMax();
-			System.out.println("ACİL TEDAVİ: " + p.getName() + " (Durum: " + p.getSeverityLevel() + ")");
-			p.addHistory("Acil müdahale yapıldı.");
+			System.out.println("TREATING PATIENT: " + p.getName() + " (Severity: " + p.getSeverityLevel() + ")");
+			p.addHistory("Treated in ER. Date: " + System.currentTimeMillis());
 		} else {
-			System.out.println("Acil serviste bekleyen yok.");
+			System.out.println("ER is empty. No patients to treat.");
 		}
 	}
 
 	public void undo() {
 		if (undoStack.isEmpty()) {
-			System.out.println("Geri alınacak işlem yok.");
+			System.out.println("Undo Stack is empty. Nothing to undo.");
 			return;
 		}
 		String action = undoStack.pop();
@@ -62,18 +65,22 @@ public class HospitalManagementSystem {
 		String command = parts[0];
 		int id = Integer.parseInt(parts[1]);
 
-		System.out.println(">>> Geri Alınıyor: " + command);
+		System.out.println(">>> UNDOING Operation: " + command);
 		if (command.equals("REGISTER")) {
 			patientTable.remove(id);
-			System.out.println("Hasta kaydı silindi (Hash Table'dan).");
+			System.out.println("Success: Patient registration removed.");
 		}
 	}
 
 	public void searchByName(String name) {
 		Patient p = nameSearchTree.search(name);
-		if (p != null)
-			System.out.println("Bulundu: " + p); //
+		if (p != null) {
+			System.out.println("FOUND: " + p.toString());
+			System.out.println("Medical History:");
+			p.getMedicalHistory().printHistory();
+		}
+
 		else
-			System.out.println("İsimle bulunamadı: " + name);
+			System.out.println("Patient not found by name: " + name);
 	}
 }
