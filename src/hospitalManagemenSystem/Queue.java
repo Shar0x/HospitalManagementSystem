@@ -93,7 +93,7 @@ public class Queue {
         Node current = front;
         System.out.print("Waiting Line: ");
         while (current != null) {
-            // We can safely access current.patient.name because we know it holds a Patient
+            // We can safely access current.patient.name because we know it holds a Patient.
             if (current.patient != null) {
                 System.out.print("[" + current.patient.getName() + "] -> ");
             }
