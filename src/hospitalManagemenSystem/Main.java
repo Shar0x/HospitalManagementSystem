@@ -26,6 +26,7 @@ public class Main {
     public void startSystem() {
         System.out.println("\n=== HOSPITAL MANAGEMENT SYSTEM ===");
         System.out.println("Initializing with Student ID: " + STUDENT_ID);
+        loadDemoData();
 
         boolean running = true;
         while (running) {
@@ -141,5 +142,21 @@ public class Main {
         int docId = Integer.parseInt(scanner.nextLine());
         
         hms.processDoctorAppointment(docId);
+    }
+    private void loadDemoData() {
+        System.out.println("\n>>> SYSTEM: Auto-loading demo patients...");
+
+        // 1. Normal Patient (Standard Registration)
+        hms.registerPatient(230315023, "Hilmi", 2);
+        
+        // 2. Critical Patient (Emergency Case)
+        hms.registerPatient(230315073, "Kayra", 9);
+        // Automatically admit this patient to ER
+        hms.admitToER(230315073);
+
+        // 3. Moderate Patient
+        hms.registerPatient(244101021, "Kayra", 5);
+        
+        System.out.println(">>> SYSTEM: Demo data loaded successfully.\n");
     }
 }
