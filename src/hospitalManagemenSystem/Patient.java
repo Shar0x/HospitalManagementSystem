@@ -14,7 +14,7 @@ public class Patient {
 	}
 
 	public void addHistory(String record) {
-		// medicalHistory.add(record);
+		medicalHistory.add(record);
 	}
 
 	// getter and setter
