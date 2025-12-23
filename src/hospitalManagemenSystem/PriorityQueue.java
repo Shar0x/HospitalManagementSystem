@@ -1,7 +1,6 @@
 package hospitalManagemenSystem;
 
 public class PriorityQueue {
-    public class PriorityQueue {
         Patient[] heap;
         int size;
         int capacity;
@@ -69,4 +68,4 @@ public class PriorityQueue {
             heap[j] = temp;
         }
     }
-}
+
