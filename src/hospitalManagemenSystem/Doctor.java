@@ -21,6 +21,9 @@ public class Doctor {
 	public String getName() {
 		return getName();
 	}
+	public String getDepartment() {
+		return department;
+	}
 
 	@Override
 	public String toString() {

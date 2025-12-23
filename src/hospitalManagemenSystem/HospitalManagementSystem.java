@@ -83,4 +83,22 @@ public class HospitalManagementSystem {
 		else
 			System.out.println("Patient not found by name: " + name);
 	}
+
+	public void searchByID(int id) {
+		Patient p = patientTable.get(id);
+		if (p != null) {
+			System.out.println("FOUND (ID Search): " + p.toString());
+		} else {
+			System.out.println("Patient not found with ID: " + id);
+		}
+	}
+
+	public void printDoctors() {
+		System.out.println("--- Doctor List ---");
+		for (Doctor d : doctors) {
+			if (d != null) {
+				System.out.println("Dr. " + d.getName() + " - " + d.getDepartment());
+			}
+		}
+	}
 }
