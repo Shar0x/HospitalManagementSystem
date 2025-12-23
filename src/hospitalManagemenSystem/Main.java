@@ -4,159 +4,68 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Student ID required for project uniqueness
-    final long STUDENT_ID = 230315023;
-    
-    // Core components
-    HospitalManagementSystem hms;
-    Scanner scanner;
+	public static void main(String[] args) {
+		// PLEASE UPDATE THIS WITH YOUR ACTUAL STUDENT ID
+		long myStudentId = 230315073;
 
-    // Constructor to initialize the system
-    public Main() {
-        this.hms = new HospitalManagementSystem(STUDENT_ID);
-        this.scanner = new Scanner(System.in);
-    }
+		System.out.println("==========================================");
+		System.out.println("   HOSPITAL MANAGEMENT SYSTEM STARTED     ");
+		System.out.println("==========================================\n");
 
-    public static void main(String[] args) {
-        // Start the application
-        Main app = new Main();
-        app.startSystem();
-    }
+		HospitalManagementSystem hms = new HospitalManagementSystem(myStudentId);
 
-    public void startSystem() {
-        System.out.println("\n=== HOSPITAL MANAGEMENT SYSTEM ===");
-        System.out.println("Initializing with Student ID: " + STUDENT_ID);
-        loadDemoData();
+		// 1. Patient Registration Test
+		System.out.println("--- 1. REGISTRATION SCENARIO ---");
+		hms.registerPatient(101, "Hilmi Aydın", 2); // Low severity
+		hms.registerPatient(102, "Kayra Emre Karaosmanoğlu", 9); // Critical severity
+		hms.registerPatient(103, "Kayra Öz", 5); // Medium severity
 
-        boolean running = true;
-        while (running) {
-            printMenu();
-            int choice = -1;
-            
-            try {
-                System.out.print("Select an option: ");
-                String input = scanner.nextLine();
-                choice = Integer.parseInt(input);
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                continue;
-            }
+		// 2. Medical History Test
+		System.out.println("\n--- 2. MEDICAL HISTORY SCENARIO ---");
+		hms.addMedicalHistory(101, "Complained of mild headache.");
+		hms.addMedicalHistory(102, "Severe chest pain reported.");
 
-            switch (choice) {
-                case 1:
-                    registerPatient(); 
-                    break;
-                case 2:
-                    searchPatient();   
-                    break;
-                case 3:
-                    admitToER();       
-                    break;
-                case 4:
-                    processER();       
-                    break;
-                case 5:
-                    undoLastAction();  
-                    break;
-                case 6:
-                    bookAppointment(); 
-                    break;
-                case 7:
-                    processDoctorQueue(); 
-                    break;
-                case 8:
-                    hms.printDoctors();
-                    break;
-                case 0:
-                    running = false;
-                    System.out.println("Exiting system. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-    }
+		// 3. Search Test (HashMap & BST)
+		System.out.println("\n--- 3. SEARCH SCENARIO ---");
+		hms.searchPatientById(102); // Lookup by ID
+		hms.searchPatientByName("Hilmi Aydın"); // Lookup by Name
 
-    private void printMenu() {
-        System.out.println("\n--- MAIN MENU ---");
-        System.out.println("1. Register New Patient");
-        System.out.println("2. Search Patient (by Name)");
-        System.out.println("3. Admit to Emergency Room (ER)");
-        System.out.println("4. Treat Critical Patient (ER Triage)");
-        System.out.println("5. Undo Last Action");
-        System.out.println("6. Book Doctor Appointment");
-        System.out.println("7. Process Doctor's Waiting Line");
-        System.out.println("8. List Doctors");
-        System.out.println("0. Exit");
-    }
+		// 4. ER Triage Test (Priority Queue)
+		// High severity patients must be treated first, regardless of arrival time
+		// [cite: 19]
+		System.out.println("\n--- 4. ER TRIAGE SCENARIO ---");
+		hms.sendToEmergency(101); // Severity 2
+		hms.sendToEmergency(103); // Severity 5
+		hms.sendToEmergency(102); // Severity 9 (Last arrival but highest priority)
 
-    private void registerPatient() {
-        System.out.print("Enter Patient ID: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        
-        System.out.print("Enter Name: ");
-        String name = scanner.nextLine();
-        
-        System.out.print("Enter Severity Level (1-10): ");
-        int sev = Integer.parseInt(scanner.nextLine());
+		System.out.println("\n[Doctors treating ER patients...]");
+		hms.treatEmergencyPatient(); // Should be Kayra (9)
+		hms.treatEmergencyPatient(); // Should be Kayra (5)
+		hms.treatEmergencyPatient(); // Should be Hilmi (2)
 
-        hms.registerPatient(id, name, sev); 
-    }
+		// 5. Doctor Queue Test (FIFO)
+		System.out.println("\n--- 5. DOCTOR APPOINTMENT SCENARIO ---");
+		hms.sendToDoctor(101, 0); // Hilmi to Dr. Cemre
+		hms.sendToDoctor(103, 0); // Kayra to Dr. Cemre
 
-    private void searchPatient() {
-        System.out.print("Enter Patient Name to Search: ");
-        String name = scanner.nextLine();
-        hms.searchByName(name);
-    }
+		hms.processDoctorQueue(0); // Hilmi first (FIFO)
+		hms.processDoctorQueue(0); // Kayra second
 
-    private void admitToER() {
-        System.out.print("Enter Patient ID for ER Admission: ");
-        int id = Integer.parseInt(scanner.nextLine());
-        hms.admitToER(id);
-    }
+		// 6. Undo Test (Stack)
+		System.out.println("\n--- 6. UNDO SCENARIO ---");
+		// Create an erroneous entry
+		hms.registerPatient(999, "Mistake Entry", 1);
+		hms.searchPatientById(999); // Verify existence
 
-    private void processER() {
-        System.out.println("--- Processing Emergency Room ---");
-        hms.processEmergency();
-    }
+		// Undo the action
+		System.out.println("-> Performing Undo...");
+		hms.undoLastAction();
 
-    private void undoLastAction() {
-        System.out.println("--- Undoing Last Operation ---");
-        hms.undo();
-    }
+		// Verify deletion
+		hms.searchPatientById(999); // Should not find
 
-    private void bookAppointment() {
-        hms.printDoctors();
-        System.out.print("Select Doctor ID: ");
-        int docId = Integer.parseInt(scanner.nextLine());
-        
-        System.out.print("Enter Patient ID: ");
-        int pId = Integer.parseInt(scanner.nextLine());
-        
-        hms.bookAppointment(docId, pId);
-    }
-
-    private void processDoctorQueue() {
-        hms.printDoctors();
-        System.out.print("Enter Doctor ID to process: ");
-        int docId = Integer.parseInt(scanner.nextLine());
-        
-        hms.processDoctorAppointment(docId);
-    }
-    private void loadDemoData() {
-        System.out.println("\n>>> SYSTEM: Auto-loading demo patients...");
-
-        // 1. Normal Patient (Standard Registration)
-        hms.registerPatient(230315023, "Hilmi", 2);
-        
-        // 2. Critical Patient (Emergency Case)
-        hms.registerPatient(230315073, "Kayra", 9);
-        // Automatically admit this patient to ER
-        hms.admitToER(230315073);
-
-        // 3. Moderate Patient
-        hms.registerPatient(244101021, "Kayra", 5);
-        
-        System.out.println(">>> SYSTEM: Demo data loaded successfully.\n");
-    }
+		System.out.println("\n==========================================");
+		System.out.println("       SYSTEM TEST COMPLETED              ");
+		System.out.println("==========================================");
+	}
 }
