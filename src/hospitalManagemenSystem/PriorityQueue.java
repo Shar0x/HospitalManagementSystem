@@ -18,7 +18,7 @@ public class PriorityQueue {
 
         public void insert(Patient p) {
             if (size == capacity) {
-                System.out.println("ER is full.");
+                System.out.println("ER is full");
                 return;
             }
             heap[size] = p;
