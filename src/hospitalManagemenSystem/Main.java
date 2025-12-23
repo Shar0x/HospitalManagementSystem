@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     // Student ID required for project uniqueness
-    final long STUDENT_ID = 230315023L;
+    final long STUDENT_ID = 230315023;
     
     // Core components
     HospitalManagementSystem hms;
