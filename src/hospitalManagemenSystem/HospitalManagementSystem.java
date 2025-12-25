@@ -2,20 +2,19 @@ package hospitalManagemenSystem;
 
 import java.util.Random;
 
-public class HospitalManagementSystem {
-	// Data Structures defined in the project
+ public class HospitalManagementSystem {
 	HashMap patientMap; // Lookup by ID
 	BinarySeacrhTree patientTree; // Search by Name
 	PriorityQueue emergencyRoom; // ER Triage
 	Doctor[] doctors;
-	Stack undoStack; // For Undo functionality
+	Stack undoStack; // For Undo function
 
 	long studentID; // To meet the Unique ID requirement
 
 	public HospitalManagementSystem(long studentID) {
 		this.studentID = studentID;
 
-		// Initialize Data Structures
+		// Integrating data structers types for the project
 		patientMap = new HashMap(100);
 		patientTree = new BinarySeacrhTree();
 		emergencyRoom = new PriorityQueue(50);
@@ -31,7 +30,7 @@ public class HospitalManagementSystem {
 		generateInitialData();
 	}
 
-	// Requirement: Use Student ID in logic [cite: 44]
+	// Requirement: Use Student ID in logic
 	private void generateInitialData() {
 		System.out.println("System initializing with Student ID: " + studentID);
 		Random rand = new Random(studentID); // Seeding random with ID
@@ -87,7 +86,7 @@ public class HospitalManagementSystem {
 		}
 	}
 
-	// 4. Doctor Appointment (Queue) [cite: 35]
+	// 4. Doctor Appointment (Queue)
 	public void sendToDoctor(int patientId, int doctorIndex) {
 		if (doctorIndex < 0 || doctorIndex >= doctors.length) {
 			System.out.println("Invalid doctor selection.");
@@ -109,7 +108,7 @@ public class HospitalManagementSystem {
 		}
 	}
 
-	// 5. Search Functionality [cite: 24]
+	// 5. Search Function
 	public void searchPatientById(int id) {
 		Patient p = patientMap.get(id);
 		if (p != null)
@@ -126,7 +125,7 @@ public class HospitalManagementSystem {
 			System.out.println("SEARCH NOT FOUND Name: " + name);
 	}
 
-	// 6. Undo Functionality (Stack) [cite: 28, 36]
+	// 6. Undo Function (Stack)
 	public void undoLastAction() {
 		if (undoStack.isEmpty()) {
 			System.out.println("Nothing to undo.");
@@ -142,8 +141,6 @@ public class HospitalManagementSystem {
 			// Remove from HashMap
 			patientMap.remove(id);
 			System.out.println("UNDO SUCCESSFUL: Removed patient with ID " + id);
-			// Note: Full removal from BST is complex; for this project scope, Map removal
-			// is sufficient demo.
 		}
 	}
 }

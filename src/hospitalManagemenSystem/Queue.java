@@ -6,7 +6,7 @@ public class Queue {
     Node rear;
     int size;
 
-    // Constructor to initialize an empty queue.
+    // Constructor for initialize an empty queue.
     public Queue() {
         this.front = null;
         this.rear = null;
@@ -14,11 +14,11 @@ public class Queue {
     }
 
     
-     // Enqueue: Adds a patient to the end of the line.
-     // Uses the Node constructor that accepts a 'Patient'.
+     // Enqueueing adds a patient to the end of the line.
+     // Uses the Node constructor that accepts a patient.
      
     public void enqueue(Patient patient) {
-        // Create a new node specifically for a Patient
+        // Create a new node specifically for a patient
         Node newNode = new Node(patient);
 
         // If the queue is empty, the new node is both front and rear.
@@ -33,15 +33,15 @@ public class Queue {
     }
 
     
-     // Dequeue: Removes the patient from the front of the line.
-     // Returns the 'Patient' object directly (no casting needed).
+     // Dequeueing removes the patient from the front of the line.
+     // Returns the patient object directly.
      
     public Patient dequeue() {
         if (front == null) {
             return null; // Queue is empty
         }
 
-        // Retrieve the patient from the 'patient' field of your Node class
+        // Retrieve the patient from the patient field of your Node class
         Patient leavingPatient = front.patient;
         
         // Move the front pointer to the next node
@@ -57,7 +57,7 @@ public class Queue {
     }
 
     
-     // Peek: Checks who is at the front without removing them.
+     // Peek method checks who is at the front without removing them.
      
     public Patient peek() {
         if (front == null) {
@@ -93,7 +93,7 @@ public class Queue {
         Node current = front;
         System.out.print("Waiting Line: ");
         while (current != null) {
-            // We can safely access current.patient.name because we know it holds a Patient.
+            // We can safely access current.patient.name because we know it holds a patient.
             if (current.patient != null) {
                 System.out.print("[" + current.patient.getName() + "] -> ");
             }

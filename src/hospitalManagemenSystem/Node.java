@@ -2,7 +2,7 @@ package hospitalManagemenSystem;
 
 public class Node {
 	
-	// "Object" is used so this Node can hold Strings (History) or Patients (Queue)
+	// We used object so this Node can hold Strings (History) or Patients (Queue)
 	Patient patient;
     String data; 
     Node next;   // Reference to the next node in the list

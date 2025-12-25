@@ -6,7 +6,7 @@ public class Doctor {
 	private String department;
 	Queue waitingLine;
 
-	// Default constructor
+	// default constructor
 	public Doctor(int id, String name, String department) {
 		this.id = id;
 		this.name = name;

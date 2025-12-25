@@ -23,6 +23,7 @@ public class Patient {
 	}
 
 	public String getName() {
+
 		return name;
 	}
 
@@ -31,7 +32,7 @@ public class Patient {
 	}
 
 	public int getSeverityLevel() {
-		// TODO Auto-generated method stub
+
 		return severityLevel;
 	}
 	public LinkedList getMedicalHistory() {
