@@ -1,5 +1,11 @@
 package hospitalManagemenSystem;
 
+/* We created some test scenarios to test the code we wrote within this class. 
+ * This allowed us to check if our code was working correctly.
+ * 
+ * 
+ * 
+ */
 public class Main {
 
 	public static void main(String[] args) {
