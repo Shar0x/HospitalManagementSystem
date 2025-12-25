@@ -29,6 +29,7 @@ public class BinarySeacrhTree {
 		return searchRec(root, name);
 	}
 
+	// searching operation and it is recursive method
 	private Patient searchRec(TreeNode root, String name) {
 		if (root == null)
 			return null;

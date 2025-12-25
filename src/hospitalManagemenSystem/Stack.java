@@ -1,23 +1,25 @@
 package hospitalManagemenSystem;
-
+	
 public class Stack {
-        Node top;
+	Node top;
 
-        public void push(String action) {
-            Node newNode = new Node(action);
-            newNode.next = top;
-            top = newNode;
-        }
+	// pushing into the stack
+	public void push(String action) {
+		Node newNode = new Node(action);
+		newNode.next = top;
+		top = newNode;
+	}
 
-        public String pop() {
-            if (top == null) return null;
-            String action = (String) top.data;
-            top = top.next;
-            return action;
-        }
+	// popping from the stack
+	public String pop() {
+		if (top == null)
+			return null;
+		String action = (String) top.data;
+		top = top.next;
+		return action;
+	}
 
-        public boolean isEmpty() {
-            return top == null;
-        }
-    }
-
+	public boolean isEmpty() {
+		return top == null;
+	}
+}

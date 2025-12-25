@@ -8,11 +8,12 @@ public class HashMap {
 		this.capacity = capacity;
 		table = new HashNode[capacity];
 	}
-
+	//hash function
 	private int hash(int key) {
 		return key % capacity;
 	}
-
+	
+	//put new value at hash table
 	public void put(int key, Patient value) {
 		int index = hash(key);
 		HashNode newNode = new HashNode(key, value);
@@ -39,7 +40,8 @@ public class HashMap {
 		}
 		return null;
 	}
-	// Removeing method
+
+	// Removing method
 	public void remove(int key) {
 		int index = hash(key);
 		HashNode current = table[index];

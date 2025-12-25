@@ -1,7 +1,7 @@
 package hospitalManagemenSystem;
 
 public class HashNode {
-
+	
 	int key;
 	Patient value;
 	HashNode next;
