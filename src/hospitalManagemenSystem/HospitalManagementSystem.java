@@ -10,7 +10,7 @@ import java.util.Random;
 	HashMap patientMap; // Lookup by unique ID
 	BinarySeacrhTree patientTree; // We used seperate BST class to store patients sorted by name
 	PriorityQueue emergencyRoom; // Used for the ER to triage patients by their severity
-	Doctor[] doctors; //For seeing the availabke doctors
+	Doctor[] doctors; //For seeing the available doctors
 	Stack undoStack; // Using LIFO For Undo function
 
 	long studentID; // To meet the Unique ID requirement
@@ -18,7 +18,7 @@ import java.util.Random;
 	public HospitalManagementSystem(long studentID) {
 		this.studentID = studentID;
 
-		// Integrating data structers types for the project
+		// Integrating data structures types for the project
 		patientMap = new HashMap(100);
 		patientTree = new BinarySeacrhTree();
 		emergencyRoom = new PriorityQueue(50);
