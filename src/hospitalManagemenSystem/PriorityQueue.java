@@ -5,6 +5,7 @@ public class PriorityQueue {
 	int size;
 	int capacity;
 
+	// Constructor
 	public PriorityQueue(int capacity) {
 		this.capacity = capacity;
 		this.heap = new Patient[capacity];
@@ -23,6 +24,7 @@ public class PriorityQueue {
 		return (2 * i) + 2;
 	}
 
+	// insterting into queue
 	public void insert(Patient p) {
 		if (size == capacity) {
 			System.out.println("ER is full");

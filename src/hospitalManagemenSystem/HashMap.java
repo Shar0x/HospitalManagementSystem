@@ -29,7 +29,7 @@ public class HashMap {
 			current.next = newNode;
 		}
 	}
-
+	
 	public Patient get(int key) {
 		int index = hash(key);
 		HashNode current = table[index];
