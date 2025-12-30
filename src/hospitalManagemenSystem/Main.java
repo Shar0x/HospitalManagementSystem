@@ -9,7 +9,7 @@ package hospitalManagemenSystem;
 public class Main {
 
 	public static void main(String[] args) {
-		long myStudentId = 230315073;
+		long myStudentId = 230315073L;
 
 		System.out.println("==========================================");
 		System.out.println("   HOSPITAL MANAGEMENT SYSTEM STARTED     ");
