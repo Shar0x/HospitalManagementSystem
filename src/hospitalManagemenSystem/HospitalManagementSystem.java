@@ -12,7 +12,7 @@ public class HospitalManagementSystem {
 	Doctor[] doctors; // For seeing the available doctors
 	Stack undoStack; // Using LIFO For Undo function
 
-	long studentID=230315023L; // To meet the Unique ID requirement
+	long studentID=230315073; // To meet the Unique ID requirement
 
 	public HospitalManagementSystem(long studentID) {
 		this.studentID = studentID;
